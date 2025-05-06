@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        table { margin: 20px auto; border-collapse: collapse; width: 90%; }
+        th, td { border: 1px solid #ccc; padding: 10px; }
+        th { background-color: #f4f4f4; }
+        #logoutBtn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <button id="logoutBtn" onclick="window.location.href='/'">Logout</button>
+    <h1>Teacher Dashboard</h1>
+    <form method="POST">
+        <input name="classroom_id" placeholder="Classroom ID" value="{{ classroom_id }}">
+        <input name="name_query" placeholder="Search by name or username" value="{{ name_query }}">
+        <input name="date_filter" type="date" value="{{ date_filter }}">
+        <button type="submit">Search</button>
+    </form>
+    
+
+    {% if scores %}
+        <h2>Scores for Classroom</h2>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>BPM</th>
+                <th>Average Timing Error (in MS)</th>
+                <th>Date</th>
+            </tr>
+            {% for row in scores %}
+            <tr>
+                <td>{{ row.first_name }}</td>
+                <td>{{ row.last_name }}</td>
+                <td>{{ row.username }}</td>
+                <td>{{ row.bpm }}</td>
+                <td>{{ row.beat_score }}</td>
+                <td>{{ row.date }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
